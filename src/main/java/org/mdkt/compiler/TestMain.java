@@ -20,5 +20,16 @@ public class TestMain {
         Method helloClassMethod = helloClass.getMethod("hello");
         Object invoke = helloClassMethod.invoke(helloClass.getDeclaredConstructor().newInstance());
         System.out.println(invoke);
+
+        StringBuilder sourceCode1 = new StringBuilder();
+        sourceCode1.append("package org.mdkt;\n");
+        sourceCode1.append("public class HelloClass {\n");
+        sourceCode1.append("   public String hello() { return \"hello\"; }");
+        sourceCode1.append("}");
+
+        Class<?> helloClass1 = InMemoryJavaCompiler.newInstance().compile("org.mdkt.HelloClass", sourceCode1.toString());
+        Method helloClassMethod1 = helloClass.getMethod("hello");
+        Object invoke1 = helloClassMethod1.invoke(helloClass1.getDeclaredConstructor().newInstance());
+        System.out.println(invoke1);
     }
 }
